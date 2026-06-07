@@ -1,0 +1,296 @@
+/* Core Global Parameters & Theme Architecture */
+:root {
+    --bg-dark: #090D16;
+    --bg-light: #F8FAFC;
+    --glass-dark: rgba(15, 23, 42, 0.65);
+    --glass-light: rgba(255, 255, 255, 0.8);
+    --primary-blue: #2563EB;
+    --accent-red: #EF4444;
+    --text-dark: #F1F5F9;
+    --text-light: #0F172A;
+    --border-dark: rgba(255, 255, 255, 0.08);
+    --border-light: rgba(15, 23, 42, 0.08);
+    
+    --current-bg: var(--bg-dark);
+    --current-glass: var(--glass-dark);
+    --current-text: var(--text-dark);
+    --current-border: var(--border-dark);
+}
+
+.light-theme {
+    --current-bg: var(--bg-light);
+    --current-glass: var(--glass-light);
+    --current-text: var(--text-light);
+    --current-border: var(--border-light);
+}
+
+body {
+    background-color: var(--current-bg);
+    color: var(--current-text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    margin: 0;
+    padding: 0;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Glassmorphism Structural Design Engine */
+.status-glass {
+    background: var(--current-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--current-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.status-glass:hover {
+    border-color: var(--primary-blue);
+    box-shadow: 0 8px 32px 0 rgba(37, 99, 235, 0.15);
+}
+
+/* Master Slide Presentation Engine Components */
+.presentation-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+}
+
+.slide-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 100px 40px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.6s;
+    overflow-y: auto;
+}
+
+.slide-section.active-slide {
+    opacity: 1;
+    visibility: visible;
+    z-index: 10;
+}
+
+/* Interface Control Top Navigation Bar */
+.control-navbar {
+    background: var(--current-glass);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--current-border);
+    padding: 12px 24px;
+    z-index: 100;
+}
+
+.brand-title {
+    color: var(--current-text);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.progress-bar-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.global-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-blue), var(--accent-red));
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Buttons and Controls Typography Visual Sensation */
+.btn-menu-toggle, .btn-icon-control, .btn-nav-arrow {
+    background: transparent;
+    border: 1px solid var(--current-border);
+    color: var(--current-text);
+    border-radius: 8px;
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.btn-menu-toggle:hover, .btn-icon-control:hover, .btn-nav-arrow:hover {
+    background: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+.timer-display {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--accent-red);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Animated Navigation Sidebar Drawer */
+.sidebar-menu {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 320px;
+    height: 100vh;
+    background: rgba(9, 13, 22, 0.95);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid var(--border-dark);
+    z-index: 200;
+    transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding-top: 20px;
+}
+
+.sidebar-menu.open {
+    left: 0;
+}
+
+.sidebar-linkslist {
+    list-style: none;
+}
+
+.sidebar-item {
+    padding: 14px 24px;
+    color: #94A3B8;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.2s ease;
+}
+
+.sidebar-item i {
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-item:hover, .sidebar-item.active {
+    color: white;
+    background: rgba(37, 99, 235, 0.15);
+    border-left: 4px solid var(--primary-blue);
+}
+
+/* Bottom Presentation Control Deck */
+.bottom-nav-controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 600px;
+    height: 64px;
+    background: var(--current-glass);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--current-border);
+    border-radius: 32px;
+    z-index: 110;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.slide-indicator-text {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--current-text) !important;
+}
+
+/* Dynamic Gradient Text Elements and Avatars */
+.text-gradient {
+    background: linear-gradient(135deg, #60A5FA 0%, #EF4444 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.instructor-avatar-container {
+    width: 220px;
+    height: 220px;
+}
+
+.avatar-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(37,99,235,0.4) 0%, transparent 70%);
+    transform: scale(1.2);
+    animation: pulsarGlow 4s infinite ease-in-out;
+}
+
+@keyframes pulsarGlow {
+    0%, 100% { transform: scale(1.1); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 1; }
+}
+
+.animate-x {
+    animation: arrowJump 1.5s infinite ease-in-out;
+}
+
+@keyframes arrowJump {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
+}
+
+/* Scroll-up Floating Control Button */
+#backToTopBtn {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    z-index: 100;
+    display: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Responsive Structural Refinements */
+@media(max-width: 768px) {
+    .slide-section { padding: 90px 20px; }
+    .bottom-nav-controls { bottom: 10px; height: 56px; }
+}
+
+/* Slide search input box spacing override */
+.slide-search-container input {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--current-border);
+    color: var(--current-text);
+    width: 140px;
+    padding-right: 35px;
+}
+.slide-search-container button {
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #64748B;
+}
